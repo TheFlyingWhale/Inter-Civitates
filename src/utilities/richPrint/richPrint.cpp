@@ -12,6 +12,11 @@ namespace Print
 		cout << endl;
 	}
 
+	void hardClear()
+	{
+		printf("\033[2J\033c");
+	}
+
 	void error(string message)
 	{
 		cout << rich("Error: ", Color::red, Decoration::bold) << message << endl;
@@ -25,7 +30,7 @@ namespace Print
 	// Only color
 	string rich(string text, Color color)
 	{
-		return "\033[" + to_string(color) + "m" + text + "\033[0m";
+		return "\033[" + getColorCode(color) + "m" + text + "\033[0m";
 	}
 
 	// Only decoration
@@ -37,6 +42,31 @@ namespace Print
 	// Color and decoration
 	string rich(string text, Color color, Decoration decoration)
 	{
-		return "\033[" + to_string(decoration) + ";" + to_string(color) + "m" + text + "\033[0m";
+		return "\033[" + getColorCode(color) + ";" + to_string(color) + "m" + text + "\033[0m";
+	}
+
+	string getColorCode(Color color)
+	{
+		switch (color)
+		{
+		case Color::black:
+			return "30";
+		case Color::red:
+			return "31";
+		case Color::green:
+			return "32";
+		case Color::yellow:
+			return "33";
+		case Color::blue:
+			return "34";
+		case Color::magenta:
+			return "35";
+		case Color::cyan:
+			return "36";
+		case Color::orange:
+			return "38;2;255;165;";
+		default:
+			return "37";
+		}
 	}
 };

@@ -2,6 +2,7 @@
 #define RESOURCE
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
