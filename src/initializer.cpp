@@ -32,9 +32,10 @@ void init()
 void startBattle()
 {
 	Character *player = new Character("player");
-	player->addWeapon(new UsableItem("Sword", 100, 100, 100));
+	player->addWeapon(new UsableItem("Sword"));
 
 	Character *enemy = new Character("enemy");
+	enemy->addWeapon(new UsableItem("Sword"));
 	Arena ar = Arena();
 	ar.mountPlayer(player);
 	ar.mountEnemy(enemy);

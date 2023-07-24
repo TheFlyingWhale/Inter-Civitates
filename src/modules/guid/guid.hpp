@@ -1,6 +1,8 @@
 #ifndef GENERATE_UNIQUE_IDENTIFICATION
 #define GENERATE_UNIQUE_IDENTIFICATION
 
+#include "../../utilities/utilities.hpp"
+
 #include <string>
 #include <ctime>
 
@@ -9,10 +11,7 @@ using namespace std;
 class GUID
 {
 private:
-	GUID()
-	{
-		srand(time(nullptr));
-	}
+	GUID() {}
 	~GUID() {}
 	static GUID *instance_;
 
@@ -34,7 +33,7 @@ private:
 public:
 	string genUID(string prefix)
 	{
-		string uuid = formStr(prefix) + to_string(id) + to_string(rand() % 999);
+		string uuid = formStr(prefix) + to_string(id) + to_string(randomInt(9999));
 		id++;
 		return uuid;
 	}

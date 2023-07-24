@@ -69,7 +69,13 @@ public:
 			cout << "[" << pair.first << "] - " << pair.second->description << endl;
 		}
 	}
-	~ClassController() {}
+	~ClassController()
+	{
+		for (const auto &pair : actions)
+		{
+			delete pair.second;
+		}
+	}
 };
 
 #endif

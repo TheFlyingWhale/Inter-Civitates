@@ -28,6 +28,12 @@ public:
 
 	int attack()
 	{
+		if (energy.getValue() < 10)
+		{
+			cout << "Not enough energy" << endl;
+			return 0;
+		}
+		energy.decValue(10);
 		return weapon->calculateHit();
 	}
 
@@ -42,6 +48,16 @@ public:
 		{
 			cout << name << " died" << endl;
 		}
+	}
+
+	void incEnergy(int amo)
+	{
+		energy.incValue(amo);
+	}
+
+	void decEnergy(int amo)
+	{
+		energy.decValue(amo);
 	}
 
 	void addWeapon(UsableItem *wea)
