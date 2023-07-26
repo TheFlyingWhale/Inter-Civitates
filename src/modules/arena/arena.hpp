@@ -3,14 +3,14 @@
 
 #include "../../utilities/utilities.hpp"
 #include "../character/character.hpp"
-#include "../classController/classController.hpp"
+#include "../controller/controller.hpp"
 
 #include <iostream>
 
 using namespace std;
 using namespace Print;
 
-class Arena : public ClassController
+class Arena : public Controller
 {
 private:
 	Character *player;
@@ -119,17 +119,17 @@ private:
 	}
 
 public:
-	Arena() : ClassController("Arena")
+	Arena() : Controller("Arena")
 	{
-		createClassAction("q", bind(&Arena::quitBattle, this), "Exit arena");
-		createClassAction("ie", bind(&Arena::inspectEnemy, this), "Inspect enemy");
-		createClassAction("iw", bind(&Arena::inspectPlayer, this), "Inspect yourself");
-		createClassAction("i", bind(&Arena::inspect, this), "Inspect arena");
-		createClassAction("ea", bind(&Arena::enemyAttack, this), "Enemy attack");
-		createClassAction("r", bind(&Arena::rest, this), "Rest");
-		createClassAction("hp", bind(&Arena::heal, this), "Heal");
-		createClassAction("a", bind(&Arena::attack, this), "Attack enemy");
-		createClassAction("b", bind(&Arena::battle, this), "Battle");
+		createAction("q", bind(&Arena::quitBattle, this), "Exit arena");
+		createAction("ie", bind(&Arena::inspectEnemy, this), "Inspect enemy");
+		createAction("iw", bind(&Arena::inspectPlayer, this), "Inspect yourself");
+		createAction("i", bind(&Arena::inspect, this), "Inspect arena");
+		createAction("ea", bind(&Arena::enemyAttack, this), "Enemy attack");
+		createAction("r", bind(&Arena::rest, this), "Rest");
+		createAction("hp", bind(&Arena::heal, this), "Heal");
+		createAction("a", bind(&Arena::attack, this), "Attack enemy");
+		createAction("b", bind(&Arena::battle, this), "Battle");
 	}
 
 	void mountPlayer(Character *pla)
