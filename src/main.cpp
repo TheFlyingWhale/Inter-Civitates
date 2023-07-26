@@ -1,7 +1,6 @@
 #include "modules/modules.hpp"
 #include "utilities/utilities.hpp"
 #include "errors/errors.hpp"
-#include "initializer.hpp"
 
 #include <iostream>
 #include <string>
@@ -10,17 +9,10 @@ using namespace std;
 
 int main()
 {
-	Model &mm = Model::GetInstance();
-	Controller &co = Controller::GetInstance();
-
-	init();
-
+	Game game = Game();
 	try
 	{
-		while (!mm.isGameOver)
-		{
-			co.iterate();
-		}
+		game.startGame();
 	}
 	catch (const exception &ex)
 	{

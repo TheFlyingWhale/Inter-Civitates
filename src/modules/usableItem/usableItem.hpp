@@ -9,6 +9,17 @@
 using namespace std;
 using namespace Print;
 
+class UsableItem;
+
+UsableItem *createCommonWeapon();
+UsableItem *createUncommonWeapon();
+UsableItem *createSpecialWeapon();
+UsableItem *createRareWeapon();
+UsableItem *createEpicWeapon();
+UsableItem *createLegendaryWeapon();
+UsableItem *createMythicWeapon();
+UsableItem *createRandomWeapon();
+
 class UsableItem : public Item
 {
 private:
@@ -17,75 +28,6 @@ private:
 	int durability = 100;
 	Color color;
 	string rarity;
-
-	void generateRandomItem()
-	{
-		int randBase = randomInt(1000 + 1);
-		// Common
-		if (randBase > 500)
-		{
-			color = Color::white;
-			rarity = "Common";
-			value = 10;
-			chance = 25;
-			return;
-		}
-
-		// Uncommon
-		if (randBase > 250)
-		{
-			color = Color::green;
-			rarity = "Uncommon";
-			value = 20;
-			chance = 20;
-			return;
-		}
-
-		// Special
-		if (randBase > 125)
-		{
-			color = Color::cyan;
-			rarity = "Special";
-			value = 30;
-			chance = 30;
-			return;
-		}
-
-		// Rare
-		if (randBase > 50)
-		{
-			color = Color::blue;
-			rarity = "Rare";
-			value = 40;
-			chance = 40;
-		}
-
-		// Epic
-		if (randBase > 25)
-		{
-			color = Color::magenta;
-			rarity = "Epic";
-			value = 50;
-			chance = 50;
-			return;
-		}
-
-		// Legendary
-		if (randBase > 5)
-		{
-			color = Color::yellow;
-			rarity = "Legendary";
-			value = 60;
-			chance = 60;
-			return;
-		}
-
-		// Mythical
-		color = Color::orange;
-		rarity = "Mythical";
-		value = 70;
-		chance = 70;
-	}
 
 public:
 	UsableItem(string name, int val, int cha) : Item(name)
@@ -96,9 +38,10 @@ public:
 
 	UsableItem(string name) : Item(name)
 	{
-		generateRandomItem();
 		inspect();
 	}
+
+	UsableItem() : Item("No name") {}
 
 	int calculateHit()
 	{
@@ -133,6 +76,31 @@ public:
 		}
 
 		durability = dur;
+	}
+
+	void setColor(Color col)
+	{
+		color = col;
+	}
+
+	void setValue(int val)
+	{
+		value = val;
+	}
+
+	void setChance(int cha)
+	{
+		chance = cha;
+	}
+
+	void setRarity(string rar)
+	{
+		rarity = rar;
+	}
+
+	void setName(string nam)
+	{
+		Item::setName(nam);
 	}
 
 	void inspect(string prefix)

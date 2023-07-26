@@ -16,6 +16,8 @@ private:
 	string name;
 
 public:
+	Character() {}
+
 	Character(string nam)
 	{
 		name = nam;
@@ -92,12 +94,22 @@ public:
 		shield = nullptr;
 	}
 
+	void createPlayer()
+	{
+		name = "Player";
+		weapon = createSpecialWeapon();
+		// name = getInput("Provide character name", true);
+	}
+
 	void inspect()
 	{
-		cout << endl;
 		cout << Print::rich(name, Print::Color::green) << endl;
 		cout << "Health: " << health.getValue() << endl;
 		cout << "Energy: " << energy.getValue() << endl;
+		if (weapon)
+			weapon->inspect();
+		if (shield)
+			shield->inspect();
 	}
 
 	~Character()

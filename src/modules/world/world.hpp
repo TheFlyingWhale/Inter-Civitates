@@ -2,8 +2,11 @@
 #define WORLD
 
 #include "../tile/tile.hpp"
+#include "../controller/controller.hpp"
+#include "../character/character.hpp"
+#include "../usableItem/usableItem.hpp"
 
-class World
+class World : public Controller
 {
 private:
 	Tile *start = nullptr;
@@ -12,8 +15,23 @@ private:
 	Tile *iterator = nullptr;
 
 	int maxWorldSize = 10;
+	bool inWorld = false;
 
 public:
+	World() : Controller("World")
+	{
+		createAction("q", bind(&World::exitWorld, this), "Exit world");
+		createAction("i", bind(&World::printStage, this), "Inspect tile");
+		createAction(
+			"d", [this]()
+			{ forward(); printStage(); },
+			"Got to next tile");
+		createAction(
+			"a", [this]()
+			{backward(); printStage(); },
+			"Go to previous tile");
+	}
+
 	void pushBack(Tile *til)
 	{
 		if (start == nullptr)
@@ -78,13 +96,31 @@ public:
 		stage->inspect();
 	}
 
+	void exitWorld()
+	{
+		inWorld = false;
+	}
+
+	void enterWorld()
+	{
+		inWorld = true;
+		printStage();
+		while (inWorld)
+		{
+			simpleTrigger("World input");
+		}
+	}
+
 	void generateDefaultWorld()
 	{
 		for (int i = 0; i < maxWorldSize; i++)
 		{
 			Tile *newTile = new Tile();
 			newTile->setBiome("biome " + to_string(i));
-			this->pushBack(newTile);
+			Character *ene = new Character("Enemy");
+			ene->addWeapon(createRandomWeapon());
+			newTile->addEnemy(ene);
+			pushBack(newTile);
 		}
 	}
 
@@ -95,7 +131,6 @@ public:
 		while (iterator != nullptr)
 		{
 			nextIterator = iterator->getNextTile();
-			cout << "Deleting " << iterator->getBiome() << endl;
 			delete iterator;
 			iterator = nextIterator;
 		}
