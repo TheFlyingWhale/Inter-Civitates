@@ -6,6 +6,8 @@
 
 using namespace std;
 
+string getRandomBiome();
+
 class Tile
 {
 private:
@@ -25,6 +27,18 @@ public:
 		return biome;
 	}
 
+	Character *getEnemy()
+	{
+		return enemy;
+	}
+
+	void removeEnemy()
+	{
+		Character *ene = enemy;
+		delete enemy;
+		enemy = nullptr;
+	}
+
 	void addEnemy(Character *ene)
 	{
 		enemy = ene;
@@ -32,11 +46,26 @@ public:
 
 	void inspect()
 	{
-		cout << "Tile: " << biome << endl;
+		cout << "Biome: " << biome << endl;
 		if (enemy)
 		{
 			enemy->inspect();
 		}
+	}
+
+	void info()
+	{
+		cout << "Biome: " << biome << endl;
+		if (enemy)
+		{
+			cout << "Enemies: [1]" << endl;
+		}
+		else
+		{
+			cout << "Enemies: [0]" << endl;
+		}
+
+		cout << "Chests: [0]" << endl;
 	}
 
 	void setNextTile(Tile *nex)

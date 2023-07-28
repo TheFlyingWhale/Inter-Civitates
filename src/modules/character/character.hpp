@@ -2,18 +2,31 @@
 #define CHARACTER
 
 #include "../resource/resource.hpp"
-#include "../usableItem/usableItem.hpp"
+#include "../items/items.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <iostream>
 #include <string>
 
 using namespace std;
+using namespace Print;
+
+class Character;
+
+Character *createRandomEnemy();
+Character *createCommonEnemy();
+Character *createUncommonEnemy();
+Character *createSpecialEnemy();
+Character *createRareEnemy();
+Character *createEpicEnemy();
+Character *createLegendaryEnemy();
+Character *createMythicEnemy();
 
 class Character
 {
 private:
 	string name;
+	Color color = Color::white;
 
 public:
 	Character() {}
@@ -27,6 +40,16 @@ public:
 	Resource energy = Resource("Energy");
 	UsableItem *weapon = nullptr;
 	UsableItem *shield = nullptr;
+
+	void setName(string nam)
+	{
+		name = nam;
+	}
+
+	void setColor(Color col)
+	{
+		color = col;
+	}
 
 	int attack()
 	{
@@ -62,7 +85,7 @@ public:
 		energy.decValue(amo);
 	}
 
-	void addWeapon(UsableItem *wea)
+	void mountWeapon(UsableItem *wea)
 	{
 		if (weapon)
 		{
@@ -72,13 +95,13 @@ public:
 		weapon = wea;
 	}
 
-	void removeWeapon()
+	void unmountWeapon()
 	{
 		delete weapon;
 		weapon = nullptr;
 	}
 
-	void addShield(UsableItem *shi)
+	void mountShield(UsableItem *shi)
 	{
 		if (shield)
 		{
@@ -88,7 +111,7 @@ public:
 		shield = shi;
 	}
 
-	void removeShield()
+	void unmountShield()
 	{
 		delete shield;
 		shield = nullptr;
@@ -97,13 +120,14 @@ public:
 	void createPlayer()
 	{
 		name = "Player";
+		color = Color::green;
 		weapon = createSpecialWeapon();
 		// name = getInput("Provide character name", true);
 	}
 
 	void inspect()
 	{
-		cout << Print::rich(name, Print::Color::green) << endl;
+		cout << Print::rich(name, color, Decoration::bold) << endl;
 		cout << "Health: " << health.getValue() << endl;
 		cout << "Energy: " << energy.getValue() << endl;
 		if (weapon)

@@ -1,7 +1,7 @@
 #ifndef USABLE_ITEM
 #define USABLE_ITEM
 
-#include "../item/item.hpp"
+#include "item.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <iostream>

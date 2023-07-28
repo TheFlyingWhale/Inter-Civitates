@@ -1,8 +1,7 @@
 #ifndef CHEST
 #define CHEST
 
-#include "../item/item.hpp"
-#include "../usableItem/usableItem.hpp"
+#include "item.hpp"
 
 #include <vector>
 #include <iostream>

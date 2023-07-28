@@ -3,8 +3,13 @@
 
 #include "../tile/tile.hpp"
 #include "../controller/controller.hpp"
-#include "../character/character.hpp"
-#include "../usableItem/usableItem.hpp"
+#include "../items/items.hpp"
+#include "../player/player.hpp"
+#include "../arena/arena.hpp"
+
+class World;
+
+void createFirstWorld(World *wor);
 
 class World : public Controller
 {
@@ -16,19 +21,21 @@ private:
 
 	int maxWorldSize = 10;
 	bool inWorld = false;
+	Player &pl = Player::getInstance();
 
 public:
 	World() : Controller("World")
 	{
 		createAction("q", bind(&World::exitWorld, this), "Exit world");
 		createAction("i", bind(&World::printStage, this), "Inspect tile");
+		createAction("b", bind(&World::startBattle, this), "Start battle");
 		createAction(
 			"d", [this]()
-			{ forward(); printStage(); },
+			{ forward(); stage->info(); },
 			"Got to next tile");
 		createAction(
 			"a", [this]()
-			{backward(); printStage(); },
+			{backward(); stage->info(); },
 			"Go to previous tile");
 	}
 
@@ -91,6 +98,15 @@ public:
 		}
 	}
 
+	void startBattle()
+	{
+		Arena *arena = new Arena(stage);
+		arena->mountEnemy(stage->getEnemy());
+		// arena->mountPlayer(pl);
+		arena->startBattle();
+		delete arena;
+	}
+
 	void printStage()
 	{
 		stage->inspect();
@@ -104,24 +120,16 @@ public:
 	void enterWorld()
 	{
 		inWorld = true;
-		printStage();
+		stage->info();
 		while (inWorld)
 		{
-			simpleTrigger("World input");
+			autoTrigger("World input - h for help");
 		}
 	}
 
-	void generateDefaultWorld()
+	void generateWorld()
 	{
-		for (int i = 0; i < maxWorldSize; i++)
-		{
-			Tile *newTile = new Tile();
-			newTile->setBiome("biome " + to_string(i));
-			Character *ene = new Character("Enemy");
-			ene->addWeapon(createRandomWeapon());
-			newTile->addEnemy(ene);
-			pushBack(newTile);
-		}
+		createFirstWorld(this);
 	}
 
 	void destroyWorld()
@@ -134,6 +142,7 @@ public:
 			delete iterator;
 			iterator = nextIterator;
 		}
+		start = nullptr;
 	}
 
 	~World()

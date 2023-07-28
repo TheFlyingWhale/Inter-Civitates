@@ -5,13 +5,14 @@
 #include "../character/character.hpp"
 #include "../world/world.hpp"
 #include "../../utilities/utilities.hpp"
+#include "../player/player.hpp"
 
 class Game : public Controller
 {
 private:
 	bool gameOver = false;
-	Character player = Character();
 	World world = World();
+	Player &player = Player::getInstance();
 
 	void quitGame()
 	{
@@ -22,7 +23,7 @@ public:
 	Game() : Controller("Game")
 	{
 		player.createPlayer();
-		world.generateDefaultWorld();
+		world.generateWorld();
 
 		createAction(
 			"w", [this]()
@@ -39,10 +40,12 @@ public:
 
 	void startGame()
 	{
+		system("clear");
+		cout << "C Where You Go" << endl;
 		while (!gameOver)
 		{
-			string input = getInput("Please provide some input - h for help", true);
-			triggerAction(input);
+			string input = getInput("Game input - h for help", true);
+			manTrigger(input);
 		}
 	}
 };

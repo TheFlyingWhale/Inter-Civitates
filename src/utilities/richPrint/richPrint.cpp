@@ -42,7 +42,7 @@ namespace Print
 	// Color and decoration
 	string rich(string text, Color color, Decoration decoration)
 	{
-		return "\033[" + getColorCode(color) + ";" + to_string(color) + "m" + text + "\033[0m";
+		return "\033[" + getColorCode(color) + ";" + to_string(decoration) + "m" + text + "\033[0m";
 	}
 
 	string getColorCode(Color color)

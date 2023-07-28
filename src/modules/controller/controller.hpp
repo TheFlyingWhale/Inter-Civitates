@@ -75,14 +75,14 @@ public:
 	}
 
 	// For when you dont want to deal with the input yourself
-	void simpleTrigger(string message)
+	void autoTrigger(string message)
 	{
 		string input = getInput(message, true);
-		triggerAction(input);
+		manTrigger(input);
 	}
 
 	// For when you want to deal with the input yourself
-	void triggerAction(string signal)
+	void manTrigger(string signal)
 	{
 		if (signal == "h")
 			return printActions();
