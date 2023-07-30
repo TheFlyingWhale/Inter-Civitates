@@ -6,3 +6,4 @@
 using namespace std;
 
 unordered_map<string, Action *> Controller::globalActions;
+unordered_map<string, function<void()>> Controller::systemActions;

@@ -27,6 +27,7 @@ class Controller
 private:
 	unordered_map<string, Action *> actions;
 	static unordered_map<string, Action *> globalActions;
+	static unordered_map<string, function<void()>> systemActions;
 	string controllerName;
 
 	void addAction(string signal, Action *action)
@@ -37,6 +38,11 @@ private:
 	void addGlobalAction(string signal, Action *action)
 	{
 		globalActions[signal] = action;
+	}
+
+	void addSystemAction(string signal, function<void()> action)
+	{
+		systemActions[signal] = action;
 	}
 
 	void printActions()
@@ -62,29 +68,42 @@ public:
 		controllerName = name;
 	}
 
+	// Creates a action which will only be available for the class inheriting Controller
+	// The signal must be unique within the inherited class, meaning it can only trigger one action
 	void createAction(string signal, function<void()> action, string description)
 	{
 		Action *act = new Action(action, description);
 		addAction(signal, act);
 	}
 
+	// Creates a action which will be available for all classes inheriting Controller
+	// The signal must be unique across the whole program, meaning it can only trigger one action
 	void createGlobalAction(string signal, function<void()> action, string description)
 	{
 		Action *act = new Action(action, description);
 		addGlobalAction(signal, act);
 	}
 
-	// For when you dont want to deal with the input yourself
-	void simpleTrigger(string message)
+	// Creates a action which will be available for all classes inheriting Controller
+	// The signal does not have to be unique, meaning it can trigger multiple actions
+	void createSystemAction(string signal, function<void()> action)
 	{
-		string input = getInput(message, true);
-		triggerAction(input);
+		addSystemAction(signal, action);
 	}
 
-	// For when you want to deal with the input yourself
-	void triggerAction(string signal)
+	// Handles input and triggers the corresponding action
+	void autoTrigger(string message)
 	{
-		if (signal == "h")
+		string input = getInput(message, true);
+		manualTrigger(input);
+	}
+
+	// Triggers the corresponding action
+	void manualTrigger(string signal)
+	{
+		bool foundSignal = false;
+
+		if (signal == "H")
 			return printActions();
 
 		if (const auto action = actions.find(signal); action != actions.end())
@@ -98,6 +117,15 @@ public:
 			action->second->action();
 			return;
 		}
+
+		if (const auto action = systemActions.find(signal); action != systemActions.end())
+		{
+			action->second();
+			foundSignal = true;
+		}
+
+		if (foundSignal)
+			return;
 
 		cout << rich("Action with signal [" + signal + "] does not exit", Color::red) << endl;
 		printActions();

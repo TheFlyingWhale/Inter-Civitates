@@ -1,7 +1,7 @@
 #ifndef USABLE_ITEM
 #define USABLE_ITEM
 
-#include "../item/item.hpp"
+#include "item.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <iostream>
@@ -20,12 +20,20 @@ UsableItem *createLegendaryWeapon();
 UsableItem *createMythicWeapon();
 UsableItem *createRandomWeapon();
 
+UsableItem *createCommonShield();
+UsableItem *createUncommonShield();
+UsableItem *createSpecialShield();
+UsableItem *createRareShield();
+UsableItem *createEpicShield();
+UsableItem *createLegendaryShield();
+UsableItem *createMythicShield();
+UsableItem *createRandomShield();
+
 class UsableItem : public Item
 {
 private:
 	int value;
 	int chance;
-	int durability = 100;
 	Color color;
 	string rarity;
 
@@ -43,39 +51,17 @@ public:
 
 	UsableItem() : Item("No name") {}
 
-	int calculateHit()
+	int calculateValue()
 	{
-		if (durability == 0)
-		{
-			cout << name << " is broken" << endl;
-			return 0;
-		}
 		int ran = randomInt();
 		if (ran < chance)
 		{
-			cout << name << " hit" << endl;
-			durability = durability - 10;
+			// cout << name << " hit" << endl;
+			// durability = durability - 10;
 			return value;
 		}
-		cout << name << " missed" << endl;
+		// cout << name << " missed" << endl;
 		return 0;
-	}
-
-	void setDurability(int dur)
-	{
-		if (dur > 100)
-		{
-			durability = 100;
-			return;
-		}
-
-		if (dur < 0)
-		{
-			durability = 0;
-			return;
-		}
-
-		durability = dur;
 	}
 
 	void setColor(Color col)
@@ -110,7 +96,6 @@ public:
 		cout << rich(name, Decoration::bold) << " - " << rich(rarity, color) << endl;
 		cout << "Value: " << value << endl;
 		cout << "Chance: " << chance << endl;
-		cout << "Durability: " << durability << endl;
 	};
 
 	void inspect()
@@ -119,7 +104,6 @@ public:
 		cout << rich(name, Decoration::bold) << " - " << rich(rarity, color) << endl;
 		cout << "Value: " << value << endl;
 		cout << "Chance: " << chance << endl;
-		cout << "Durability: " << durability << endl;
 	}
 };
 

@@ -39,6 +39,11 @@ public:
 		return 0;
 	}
 
+	void setValue(int val)
+	{
+		value = val;
+	}
+
 	int getValue()
 	{
 		return value;

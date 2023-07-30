@@ -3,8 +3,13 @@
 
 #include "../tile/tile.hpp"
 #include "../controller/controller.hpp"
-#include "../character/character.hpp"
-#include "../usableItem/usableItem.hpp"
+#include "../items/items.hpp"
+#include "../player/player.hpp"
+#include "../arena/arena.hpp"
+
+class World;
+
+void createFirstWorld(World *wor);
 
 class World : public Controller
 {
@@ -16,20 +21,18 @@ private:
 
 	int maxWorldSize = 10;
 	bool inWorld = false;
+	Player &pl = Player::getInstance();
 
 public:
 	World() : Controller("World")
 	{
 		createAction("q", bind(&World::exitWorld, this), "Exit world");
 		createAction("i", bind(&World::printStage, this), "Inspect tile");
-		createAction(
-			"d", [this]()
-			{ forward(); printStage(); },
-			"Got to next tile");
-		createAction(
-			"a", [this]()
-			{backward(); printStage(); },
-			"Go to previous tile");
+		createAction("b", bind(&World::startBattle, this), "Start battle");
+		createAction("d", bind(&World::forward, this), "Go to next tile");
+		createAction("a", bind(&World::backward, this), "Go to previous tile");
+
+		createSystemAction("EXIT_WORLD", bind(&World::exitWorld, this));
 	}
 
 	void pushBack(Tile *til)
@@ -91,9 +94,23 @@ public:
 		}
 	}
 
+	void startBattle()
+	{
+		if (stage->getEnemy() == nullptr)
+		{
+			cout << rich("There is no enemy to fight", Color::red) << endl;
+			return;
+		}
+		Arena *arena = new Arena(stage);
+		arena->mountEnemy(stage->getEnemy());
+		arena->startBattle();
+		delete arena;
+	}
+
 	void printStage()
 	{
 		stage->inspect();
+		cout << endl;
 	}
 
 	void exitWorld()
@@ -104,24 +121,17 @@ public:
 	void enterWorld()
 	{
 		inWorld = true;
-		printStage();
 		while (inWorld)
 		{
-			simpleTrigger("World input");
+			stage->info();
+			autoTrigger("World input");
 		}
 	}
 
-	void generateDefaultWorld()
+	void generateWorld()
 	{
-		for (int i = 0; i < maxWorldSize; i++)
-		{
-			Tile *newTile = new Tile();
-			newTile->setBiome("biome " + to_string(i));
-			Character *ene = new Character("Enemy");
-			ene->addWeapon(createRandomWeapon());
-			newTile->addEnemy(ene);
-			pushBack(newTile);
-		}
+		destroyWorld();
+		createFirstWorld(this);
 	}
 
 	void destroyWorld()
@@ -134,6 +144,8 @@ public:
 			delete iterator;
 			iterator = nextIterator;
 		}
+		start = nullptr;
+		end = nullptr;
 	}
 
 	~World()
