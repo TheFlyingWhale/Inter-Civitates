@@ -14,8 +14,11 @@ private:
 	{
 		setName("Player");
 		setColor(Color::green);
-		// mountWeapon(createSpecialWeapon());
+		mountWeapon(createSpecialWeapon());
 		mountShield(createSpecialShield());
+		inventory.addItem(createMythicWeapon());
+		inventory.addItem(new HealthPotion());
+		inventory.addItem(new EnergyPotion());
 	}
 	~Player() {}
 

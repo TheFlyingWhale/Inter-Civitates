@@ -2,7 +2,8 @@
 #define CHARACTER
 
 #include "../resource/resource.hpp"
-#include "../items/items.hpp"
+#include "../items/usableItem.hpp"
+#include "../items/storage/storage.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <iostream>
@@ -38,6 +39,7 @@ public:
 
 	Resource health = Resource("Health");
 	Resource energy = Resource("Energy");
+	Storage inventory = Storage("Inventory");
 	UsableItem *weapon = nullptr;
 	UsableItem *shield = nullptr;
 
@@ -138,10 +140,22 @@ public:
 		cout << Print::rich(name, color, Decoration::bold) << endl;
 		cout << "Health: " << rich(to_string(health.getValue()), colorStatus(health.getValue()), Decoration::bold) << endl;
 		cout << "Energy: " << rich(to_string(energy.getValue()), colorStatus(energy.getValue()), Decoration::bold) << endl;
+		cout << endl;
 		if (weapon)
+		{
 			weapon->inspect();
+			cout << endl;
+		}
 		if (shield)
+		{
 			shield->inspect();
+			cout << endl;
+		}
+		if (!inventory.empty())
+		{
+			inventory.inspect();
+			cout << endl;
+		}
 	}
 
 	~Character()

@@ -6,6 +6,7 @@
 #include "../world/world.hpp"
 #include "../../utilities/utilities.hpp"
 #include "../player/player.hpp"
+#include "../testGrounud/testGrounud.hpp"
 
 using namespace Print;
 
@@ -15,6 +16,7 @@ private:
 	bool gameOver = false;
 	World world = World();
 	Player &player = Player::getInstance();
+	TestGround testGround = TestGround();
 
 	void quitGame()
 	{
@@ -34,12 +36,17 @@ public:
 	{
 		world.generateWorld();
 
+		createAction("q", bind(&Game::quitGame, this), "Quit game");
+
+		createAction(
+			"t", [this]()
+			{ testGround.enterTestGround(); },
+			"Enter test ground");
+
 		createAction(
 			"w", [this]()
 			{ world.enterWorld(); },
 			"Enter world");
-
-		createAction("q", bind(&Game::quitGame, this), "Quit game");
 
 		createGlobalAction(
 			"ip", [this]()

@@ -11,24 +11,6 @@ using namespace Print;
 
 class UsableItem;
 
-// UsableItem *createCommonWeapon();
-// UsableItem *createUncommonWeapon();
-// UsableItem *createSpecialWeapon();
-// UsableItem *createRareWeapon();
-// UsableItem *createEpicWeapon();
-// UsableItem *createLegendaryWeapon();
-// UsableItem *createMythicWeapon();
-// UsableItem *createRandomWeapon();
-
-// UsableItem *createCommonShield();
-// UsableItem *createUncommonShield();
-// UsableItem *createSpecialShield();
-// UsableItem *createRareShield();
-// UsableItem *createEpicShield();
-// UsableItem *createLegendaryShield();
-// UsableItem *createMythicShield();
-// UsableItem *createRandomShield();
-
 class UsableItem : public Item
 {
 private:
@@ -44,10 +26,7 @@ public:
 		chance = cha;
 	}
 
-	UsableItem(string name) : Item(name)
-	{
-		inspect();
-	}
+	UsableItem(string name) : Item(name) {}
 
 	UsableItem() : Item("No name") {}
 
@@ -84,14 +63,8 @@ public:
 		rarity = rar;
 	}
 
-	void setName(string nam)
-	{
-		Item::setName(nam);
-	}
-
 	void inspect(string prefix)
 	{
-		cout << endl;
 		cout << prefix << endl;
 		cout << rich(name, Decoration::bold) << " - " << rich(rarity, color) << endl;
 		cout << "Value: " << value << endl;
@@ -100,7 +73,6 @@ public:
 
 	void inspect()
 	{
-		cout << endl;
 		cout << rich(name, Decoration::bold) << " - " << rich(rarity, color) << endl;
 		cout << "Value: " << value << endl;
 		cout << "Chance: " << chance << endl;

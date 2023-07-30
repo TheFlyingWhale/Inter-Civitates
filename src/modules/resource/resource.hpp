@@ -41,6 +41,16 @@ public:
 
 	void setValue(int val)
 	{
+		if (val > 100)
+		{
+			value = 100;
+			return;
+		}
+		if (val < 0)
+		{
+			value = 0;
+			return;
+		}
 		value = val;
 	}
 
