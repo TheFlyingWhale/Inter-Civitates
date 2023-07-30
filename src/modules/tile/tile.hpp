@@ -46,11 +46,12 @@ public:
 
 	void inspect()
 	{
-		cout << "Biome: " << biome << endl;
 		if (enemy)
 		{
 			enemy->inspect();
+			return;
 		}
+		cout << rich("This tile is empty", Color::orange) << endl;
 	}
 
 	void info()

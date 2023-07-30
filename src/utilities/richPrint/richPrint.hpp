@@ -39,6 +39,8 @@ namespace Print
 
 	void success(string message);
 
+	Color colorStatus(int value);
+
 	string rich(string text, Color color);
 
 	string rich(string text, Decoration decoration);

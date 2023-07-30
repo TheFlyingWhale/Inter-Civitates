@@ -29,14 +29,10 @@ public:
 		createAction("q", bind(&World::exitWorld, this), "Exit world");
 		createAction("i", bind(&World::printStage, this), "Inspect tile");
 		createAction("b", bind(&World::startBattle, this), "Start battle");
-		createAction(
-			"d", [this]()
-			{ forward(); stage->info(); },
-			"Got to next tile");
-		createAction(
-			"a", [this]()
-			{backward(); stage->info(); },
-			"Go to previous tile");
+		createAction("d", bind(&World::forward, this), "Go to next tile");
+		createAction("a", bind(&World::backward, this), "Go to previous tile");
+
+		createSystemAction("EXIT_WORLD", bind(&World::exitWorld, this));
 	}
 
 	void pushBack(Tile *til)
@@ -100,9 +96,13 @@ public:
 
 	void startBattle()
 	{
+		if (stage->getEnemy() == nullptr)
+		{
+			cout << rich("There is no enemy to fight", Color::red) << endl;
+			return;
+		}
 		Arena *arena = new Arena(stage);
 		arena->mountEnemy(stage->getEnemy());
-		// arena->mountPlayer(pl);
 		arena->startBattle();
 		delete arena;
 	}
@@ -110,6 +110,7 @@ public:
 	void printStage()
 	{
 		stage->inspect();
+		cout << endl;
 	}
 
 	void exitWorld()
@@ -120,15 +121,16 @@ public:
 	void enterWorld()
 	{
 		inWorld = true;
-		stage->info();
 		while (inWorld)
 		{
-			autoTrigger("World input - h for help");
+			stage->info();
+			autoTrigger("World input");
 		}
 	}
 
 	void generateWorld()
 	{
+		destroyWorld();
 		createFirstWorld(this);
 	}
 
@@ -143,6 +145,7 @@ public:
 			iterator = nextIterator;
 		}
 		start = nullptr;
+		end = nullptr;
 	}
 
 	~World()

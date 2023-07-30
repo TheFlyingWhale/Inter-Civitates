@@ -7,6 +7,8 @@
 #include "../../utilities/utilities.hpp"
 #include "../player/player.hpp"
 
+using namespace Print;
+
 class Game : public Controller
 {
 private:
@@ -19,10 +21,17 @@ private:
 		gameOver = true;
 	}
 
+	void resetGame()
+	{
+		system("clear");
+		cout << rich("Game over!", Color::red) << endl;
+		player.resetPlayer();
+		world.generateWorld();
+	}
+
 public:
 	Game() : Controller("Game")
 	{
-		player.createPlayer();
 		world.generateWorld();
 
 		createAction(
@@ -30,12 +39,15 @@ public:
 			{ world.enterWorld(); },
 			"Enter world");
 
+		createAction("q", bind(&Game::quitGame, this), "Quit game");
+
 		createGlobalAction(
 			"ip", [this]()
 			{ player.inspect(); },
 			"Inspect player");
 
-		createAction("q", bind(&Game::quitGame, this), "Quit game");
+		createSystemAction("GAME_OVER", bind(&Game::resetGame, this));
+		createSystemAction("QUIT_GAME", bind(&Game::quitGame, this));
 	}
 
 	void startGame()
@@ -44,8 +56,8 @@ public:
 		cout << "C Where You Go" << endl;
 		while (!gameOver)
 		{
-			string input = getInput("Game input - h for help", true);
-			manTrigger(input);
+			string input = getInput("Main menu", true);
+			manualTrigger(input);
 		}
 	}
 };

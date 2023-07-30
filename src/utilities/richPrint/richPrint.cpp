@@ -27,6 +27,16 @@ namespace Print
 		cout << rich("Success: ", Color::green, Decoration::bold) << message << endl;
 	}
 
+	Color colorStatus(int value)
+	{
+		if (value < 30)
+			return Color::red;
+		if (value < 60)
+			return Color::orange;
+
+		return Color::green;
+	}
+
 	// Only color
 	string rich(string text, Color color)
 	{

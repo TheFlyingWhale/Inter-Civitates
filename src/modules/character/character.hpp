@@ -26,7 +26,7 @@ class Character
 {
 private:
 	string name;
-	Color color = Color::white;
+	Color color = Color::red;
 
 public:
 	Character() {}
@@ -59,7 +59,12 @@ public:
 			return 0;
 		}
 		energy.decValue(10);
-		return weapon->calculateHit();
+		return weapon->calculateValue();
+	}
+
+	int block()
+	{
+		return shield->calculateValue();
 	}
 
 	void incHealth(int amo)
@@ -117,19 +122,22 @@ public:
 		shield = nullptr;
 	}
 
-	void createPlayer()
+	void inspect(string prefix)
 	{
-		name = "Player";
-		color = Color::green;
-		weapon = createSpecialWeapon();
-		// name = getInput("Provide character name", true);
+		cout << Print::rich(prefix + " " + name, color, Decoration::bold) << endl;
+		cout << "Health: " << health.getValue() << endl;
+		cout << "Energy: " << energy.getValue() << endl;
+		if (weapon)
+			weapon->inspect();
+		if (shield)
+			shield->inspect();
 	}
 
 	void inspect()
 	{
 		cout << Print::rich(name, color, Decoration::bold) << endl;
-		cout << "Health: " << health.getValue() << endl;
-		cout << "Energy: " << energy.getValue() << endl;
+		cout << "Health: " << rich(to_string(health.getValue()), colorStatus(health.getValue())) << endl;
+		cout << "Energy: " << rich(to_string(energy.getValue()), colorStatus(energy.getValue())) << endl;
 		if (weapon)
 			weapon->inspect();
 		if (shield)

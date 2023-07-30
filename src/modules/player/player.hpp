@@ -12,7 +12,10 @@ class Player : public Character
 private:
 	Player() : Character()
 	{
-		createPlayer();
+		setName("Player");
+		setColor(Color::green);
+		mountWeapon(createSpecialWeapon());
+		mountShield(createSpecialShield());
 	}
 	~Player() {}
 
@@ -28,12 +31,10 @@ public:
 		return *instance;
 	}
 
-	void createPlayer()
+	void resetPlayer()
 	{
-		setName("Player");
-		setColor(Color::green);
-		mountWeapon(createSpecialWeapon());
-		// name = getInput("Provide character name", true);
+		health.setValue(100);
+		energy.setValue(100);
 	}
 };
 

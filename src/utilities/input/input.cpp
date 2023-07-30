@@ -7,7 +7,7 @@ using namespace std;
 
 string getInput(string prompt, bool clear)
 {
-	cout << prompt << endl;
+	cout << prompt + " - H for help" << endl;
 	string input;
 	cin >> input;
 	if (clear)
