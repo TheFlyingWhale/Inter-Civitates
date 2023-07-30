@@ -11,23 +11,23 @@ using namespace Print;
 
 class UsableItem;
 
-UsableItem *createCommonWeapon();
-UsableItem *createUncommonWeapon();
-UsableItem *createSpecialWeapon();
-UsableItem *createRareWeapon();
-UsableItem *createEpicWeapon();
-UsableItem *createLegendaryWeapon();
-UsableItem *createMythicWeapon();
-UsableItem *createRandomWeapon();
+// UsableItem *createCommonWeapon();
+// UsableItem *createUncommonWeapon();
+// UsableItem *createSpecialWeapon();
+// UsableItem *createRareWeapon();
+// UsableItem *createEpicWeapon();
+// UsableItem *createLegendaryWeapon();
+// UsableItem *createMythicWeapon();
+// UsableItem *createRandomWeapon();
 
-UsableItem *createCommonShield();
-UsableItem *createUncommonShield();
-UsableItem *createSpecialShield();
-UsableItem *createRareShield();
-UsableItem *createEpicShield();
-UsableItem *createLegendaryShield();
-UsableItem *createMythicShield();
-UsableItem *createRandomShield();
+// UsableItem *createCommonShield();
+// UsableItem *createUncommonShield();
+// UsableItem *createSpecialShield();
+// UsableItem *createRareShield();
+// UsableItem *createEpicShield();
+// UsableItem *createLegendaryShield();
+// UsableItem *createMythicShield();
+// UsableItem *createRandomShield();
 
 class UsableItem : public Item
 {

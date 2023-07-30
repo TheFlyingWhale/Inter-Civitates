@@ -136,8 +136,8 @@ public:
 	void inspect()
 	{
 		cout << Print::rich(name, color, Decoration::bold) << endl;
-		cout << "Health: " << rich(to_string(health.getValue()), colorStatus(health.getValue())) << endl;
-		cout << "Energy: " << rich(to_string(energy.getValue()), colorStatus(energy.getValue())) << endl;
+		cout << "Health: " << rich(to_string(health.getValue()), colorStatus(health.getValue()), Decoration::bold) << endl;
+		cout << "Energy: " << rich(to_string(energy.getValue()), colorStatus(energy.getValue()), Decoration::bold) << endl;
 		if (weapon)
 			weapon->inspect();
 		if (shield)

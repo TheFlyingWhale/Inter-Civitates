@@ -1,4 +1,6 @@
 #include "character.hpp"
+#include "../items/items.hpp"
+#include "../items/weapon/weapon.hpp"
 
 #include <string>
 
@@ -73,7 +75,7 @@ Character *createRandomEnemy()
 Character *createCommonEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createCommonWeapon());
+	// ene->mountWeapon(createCommonWeapon());
 	ene->mountShield(createCommonShield());
 	return ene;
 }
@@ -81,7 +83,7 @@ Character *createCommonEnemy()
 Character *createUncommonEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createUncommonWeapon());
+	// ene->mountWeapon(createUncommonWeapon());
 	ene->mountShield(createUncommonShield());
 	return ene;
 }
@@ -89,7 +91,7 @@ Character *createUncommonEnemy()
 Character *createSpecialEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createSpecialWeapon());
+	// ene->mountWeapon(createSpecialWeapon());
 	ene->mountShield(createSpecialShield());
 	return ene;
 }
@@ -97,7 +99,7 @@ Character *createSpecialEnemy()
 Character *createRareEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createRareWeapon());
+	// ene->mountWeapon(createRareWeapon());
 	ene->mountShield(createRareShield());
 	return ene;
 }
@@ -105,7 +107,7 @@ Character *createRareEnemy()
 Character *createEpicEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createEpicWeapon());
+	// ene->mountWeapon(createEpicWeapon());
 	ene->mountShield(createEpicShield());
 	return ene;
 }
@@ -113,7 +115,7 @@ Character *createEpicEnemy()
 Character *createLegendaryEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createLegendaryWeapon());
+	// ene->mountWeapon(createLegendaryWeapon());
 	ene->mountShield(createLegendaryShield());
 	return ene;
 }
@@ -121,7 +123,7 @@ Character *createLegendaryEnemy()
 Character *createMythicEnemy()
 {
 	Character *ene = new Character(generateRandomName());
-	ene->mountWeapon(createMythicWeapon());
+	// ene->mountWeapon(createMythicWeapon());
 	ene->mountShield(createMythicShield());
 	return ene;
 }

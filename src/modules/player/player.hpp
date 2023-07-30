@@ -14,7 +14,7 @@ private:
 	{
 		setName("Player");
 		setColor(Color::green);
-		mountWeapon(createSpecialWeapon());
+		// mountWeapon(createSpecialWeapon());
 		mountShield(createSpecialShield());
 	}
 	~Player() {}

@@ -74,7 +74,7 @@ namespace Print
 		case Color::cyan:
 			return "36";
 		case Color::orange:
-			return "38;2;255;165;";
+			return "38;5;208";
 		default:
 			return "37";
 		}
