@@ -3,13 +3,21 @@
 
 #include "../usableItem.hpp"
 
-UsableItem *createCommonShield();
-UsableItem *createUncommonShield();
-UsableItem *createSpecialShield();
-UsableItem *createRareShield();
-UsableItem *createEpicShield();
-UsableItem *createLegendaryShield();
-UsableItem *createMythicShield();
-UsableItem *createRandomShield();
+class Shield;
+
+Shield *createCommonShield();
+Shield *createUncommonShield();
+Shield *createSpecialShield();
+Shield *createRareShield();
+Shield *createEpicShield();
+Shield *createLegendaryShield();
+Shield *createMythicShield();
+Shield *createRandomShield();
+
+class Shield : public UsableItem
+{
+public:
+	Shield() : UsableItem() {}
+};
 
 #endif

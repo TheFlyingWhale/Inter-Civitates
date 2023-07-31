@@ -3,9 +3,9 @@
 
 using namespace Print;
 
-UsableItem *createCommonWeapon()
+Weapon *createCommonWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Common weapon");
 	ite->setRarity("Common");
 	ite->setValue(10);
@@ -15,9 +15,9 @@ UsableItem *createCommonWeapon()
 	return ite;
 }
 
-UsableItem *createUncommonWeapon()
+Weapon *createUncommonWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Uncommon weapon");
 	ite->setRarity("Uncommon");
 	ite->setValue(20);
@@ -27,9 +27,9 @@ UsableItem *createUncommonWeapon()
 	return ite;
 }
 
-UsableItem *createSpecialWeapon()
+Weapon *createSpecialWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Special weapon");
 	ite->setRarity("Special");
 	ite->setValue(30);
@@ -39,9 +39,9 @@ UsableItem *createSpecialWeapon()
 	return ite;
 }
 
-UsableItem *createRareWeapon()
+Weapon *createRareWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Rare weapon");
 	ite->setRarity("Rare");
 	ite->setValue(40);
@@ -51,9 +51,9 @@ UsableItem *createRareWeapon()
 	return ite;
 }
 
-UsableItem *createEpicWeapon()
+Weapon *createEpicWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Epic weapon");
 	ite->setRarity("Epic");
 	ite->setValue(50);
@@ -63,9 +63,9 @@ UsableItem *createEpicWeapon()
 	return ite;
 }
 
-UsableItem *createLegendaryWeapon()
+Weapon *createLegendaryWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Legendary weapon");
 	ite->setRarity("Legendary");
 	ite->setValue(60);
@@ -75,9 +75,9 @@ UsableItem *createLegendaryWeapon()
 	return ite;
 }
 
-UsableItem *createMythicWeapon()
+Weapon *createMythicWeapon()
 {
-	UsableItem *ite = new UsableItem();
+	Weapon *ite = new Weapon();
 	ite->setName("Mythic weapon");
 	ite->setRarity("Mythic");
 	ite->setValue(70);
@@ -87,7 +87,7 @@ UsableItem *createMythicWeapon()
 	return ite;
 }
 
-UsableItem *createRandomWeapon()
+Weapon *createRandomWeapon()
 {
 	int randBase = randomInt(1000 + 1);
 	if (randBase > 500)

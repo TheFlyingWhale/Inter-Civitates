@@ -3,9 +3,9 @@
 
 using namespace Print;
 
-UsableItem *createCommonShield()
+Shield *createCommonShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Common shield");
 	ite->setRarity("Common");
 	ite->setValue(10);
@@ -15,9 +15,9 @@ UsableItem *createCommonShield()
 	return ite;
 }
 
-UsableItem *createUncommonShield()
+Shield *createUncommonShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Uncommon shield");
 	ite->setRarity("Uncommon");
 	ite->setValue(20);
@@ -27,9 +27,9 @@ UsableItem *createUncommonShield()
 	return ite;
 }
 
-UsableItem *createSpecialShield()
+Shield *createSpecialShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Special shield");
 	ite->setRarity("Special");
 	ite->setValue(30);
@@ -39,9 +39,9 @@ UsableItem *createSpecialShield()
 	return ite;
 }
 
-UsableItem *createRareShield()
+Shield *createRareShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Rare shield");
 	ite->setRarity("Rare");
 	ite->setValue(40);
@@ -51,9 +51,9 @@ UsableItem *createRareShield()
 	return ite;
 }
 
-UsableItem *createEpicShield()
+Shield *createEpicShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Epic shield");
 	ite->setRarity("Epic");
 	ite->setValue(50);
@@ -63,9 +63,9 @@ UsableItem *createEpicShield()
 	return ite;
 }
 
-UsableItem *createLegendaryShield()
+Shield *createLegendaryShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Legendary shield");
 	ite->setRarity("Legendary");
 	ite->setValue(60);
@@ -75,9 +75,9 @@ UsableItem *createLegendaryShield()
 	return ite;
 }
 
-UsableItem *createMythicShield()
+Shield *createMythicShield()
 {
-	UsableItem *ite = new UsableItem();
+	Shield *ite = new Shield();
 	ite->setName("Mythic shield");
 	ite->setRarity("Mythic");
 	ite->setValue(70);
@@ -87,7 +87,7 @@ UsableItem *createMythicShield()
 	return ite;
 }
 
-UsableItem *createRandomShield()
+Shield *createRandomShield()
 {
 	int randBase = randomInt(1000 + 1);
 	if (randBase > 500)

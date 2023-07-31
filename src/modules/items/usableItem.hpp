@@ -35,11 +35,8 @@ public:
 		int ran = randomInt();
 		if (ran < chance)
 		{
-			// cout << name << " hit" << endl;
-			// durability = durability - 10;
 			return value;
 		}
-		// cout << name << " missed" << endl;
 		return 0;
 	}
 

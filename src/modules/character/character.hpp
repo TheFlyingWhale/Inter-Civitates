@@ -4,6 +4,8 @@
 #include "../resource/resource.hpp"
 #include "../items/usableItem.hpp"
 #include "../items/storage/storage.hpp"
+#include "../items/weapon/weapon.hpp"
+#include "../items/shield/shield.hpp"
 #include "../../utilities/utilities.hpp"
 
 #include <iostream>
@@ -40,8 +42,8 @@ public:
 	Resource health = Resource("Health");
 	Resource energy = Resource("Energy");
 	Storage inventory = Storage("Inventory");
-	UsableItem *weapon = nullptr;
-	UsableItem *shield = nullptr;
+	Weapon *weapon = nullptr;
+	Shield *shield = nullptr;
 
 	void setName(string nam)
 	{
@@ -92,7 +94,7 @@ public:
 		energy.decValue(amo);
 	}
 
-	void mountWeapon(UsableItem *wea)
+	void mountWeapon(Weapon *wea)
 	{
 		if (weapon)
 		{
@@ -108,7 +110,7 @@ public:
 		weapon = nullptr;
 	}
 
-	void mountShield(UsableItem *shi)
+	void mountShield(Shield *shi)
 	{
 		if (shield)
 		{

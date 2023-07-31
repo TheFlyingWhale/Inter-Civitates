@@ -3,13 +3,21 @@
 
 #include "../usableItem.hpp"
 
-UsableItem *createCommonWeapon();
-UsableItem *createUncommonWeapon();
-UsableItem *createSpecialWeapon();
-UsableItem *createRareWeapon();
-UsableItem *createEpicWeapon();
-UsableItem *createLegendaryWeapon();
-UsableItem *createMythicWeapon();
-UsableItem *createRandomWeapon();
+class Weapon;
+
+Weapon *createCommonWeapon();
+Weapon *createUncommonWeapon();
+Weapon *createSpecialWeapon();
+Weapon *createRareWeapon();
+Weapon *createEpicWeapon();
+Weapon *createLegendaryWeapon();
+Weapon *createMythicWeapon();
+Weapon *createRandomWeapon();
+
+class Weapon : public UsableItem
+{
+public:
+	Weapon() : UsableItem() {}
+};
 
 #endif
