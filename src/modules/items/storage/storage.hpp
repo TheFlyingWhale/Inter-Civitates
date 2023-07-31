@@ -3,11 +3,15 @@
 
 #include "../../../utilities/utilities.hpp"
 #include "../item.hpp"
+#include "../usableItem.hpp"
 
 #include <vector>
+#include <iostream>
 
 using namespace std;
 using namespace Print;
+
+class Potion;
 
 class Storage : public Item
 {
@@ -38,16 +42,39 @@ public:
 			return;
 		}
 		cout << getName() + ":" << endl;
-		for (Item *item : items)
+		for (int i = 0; i < items.size(); i++)
 		{
-			item->inspect();
+			cout << "Item " << i << ":" << endl;
+			items.at(i)->inspect();
 			cout << endl;
 		}
+	}
+
+	template <typename T>
+	void inspectOnlyCertainType(T *item)
+	{
+		if (dynamic_cast<Potion *>(item))
+		{
+			cout << "A potion was provided" << endl;
+			return;
+		}
+		if (dynamic_cast<UsableItem *>(item))
+		{
+			cout << "A usable item was provided" << endl;
+			return;
+		}
+		cout << "Unkown item was provided" << endl;
 	}
 
 	bool empty()
 	{
 		return occupiedSlots == 0;
+	}
+
+	void trashItem(int index)
+	{
+		cout << "Are you sure you want to delete:" << endl;
+		items.at(index)->inspect();
 	}
 
 	void clearStorage()

@@ -13,7 +13,8 @@ class TestGround : public Controller
 {
 private:
 	bool inTestGround = false;
-	Storage storage = Storage("test");
+	Storage storage = Storage("Test storage");
+	Player &player = Player::getInstance();
 
 public:
 	TestGround() : Controller("Test ground")
@@ -21,6 +22,20 @@ public:
 		createAction("q", bind(&TestGround::exitTestGround, this), "Exit test ground");
 		createAction("i", bind(&TestGround::inspect, this), "inspect storage");
 		createAction("f", bind(&TestGround::fillStorage, this), "Fill storage");
+		createAction(
+			"dc1", [this]()
+			{ player.inventory.inspectOnlyCertainType(player.weapon); },
+			"dynamic casting");
+		createAction(
+			"dc2", [this]()
+			{ player.inventory.inspectOnlyCertainType(new HealthPotion()); },
+			"dynamic casting");
+
+		createAction(
+			"ti", [this]()
+			{ getPositiveInt(); },
+			"Test getInput");
+
 		createAction(
 			"c", [this]()
 			{ storage.clearStorage(); },
@@ -44,6 +59,7 @@ public:
 
 	void inspect()
 	{
+		hardClear();
 		storage.inspect();
 	}
 
