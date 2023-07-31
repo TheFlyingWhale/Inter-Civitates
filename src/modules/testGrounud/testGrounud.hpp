@@ -22,10 +22,17 @@ public:
 		createAction("q", bind(&TestGround::exitTestGround, this), "Exit test ground");
 		createAction("i", bind(&TestGround::inspect, this), "inspect storage");
 		createAction("f", bind(&TestGround::fillStorage, this), "Fill storage");
+
+		createAction(
+			"mp", [this]()
+			{ player.manage(); },
+			"Manage player");
+
 		createAction(
 			"dc1", [this]()
 			{ player.inventory.inspectOnlyCertainType(player.weapon); },
 			"dynamic casting");
+
 		createAction(
 			"dc2", [this]()
 			{ player.inventory.inspectOnlyCertainType(new HealthPotion()); },
@@ -44,12 +51,12 @@ public:
 
 	void fillStorage()
 	{
-		storage.addItem(createRandomWeapon());
-		storage.addItem(createRandomShield());
-		storage.addItem(createRandomWeapon());
-		storage.addItem(createRandomShield());
-		storage.addItem(new HealthPotion());
-		storage.addItem(new EnergyPotion());
+		storage.add(createRandomWeapon());
+		storage.add(createRandomShield());
+		storage.add(createRandomWeapon());
+		storage.add(createRandomShield());
+		storage.add(new HealthPotion());
+		storage.add(new EnergyPotion());
 	}
 
 	void exitTestGround()

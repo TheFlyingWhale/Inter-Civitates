@@ -19,19 +19,33 @@ private:
 		mountWeapon(createSpecialWeapon());
 		mountShield(createSpecialShield());
 
-		inventory.addItem(createMythicWeapon());
-		inventory.addItem(new HealthPotion());
-		inventory.addItem(new EnergyPotion());
+		inventory.add(createUncommonWeapon());
+		inventory.add(createMythicWeapon());
+		inventory.add(createEpicWeapon());
+		inventory.add(new HealthPotion());
+		inventory.add(new EnergyPotion());
+
+		createAction("cw", bind(&Player::changeWeapon, this), "Change weapon");
 
 		createAction(
 			"q", [this]()
-			{ isEditing = false; },
-			"");
+			{ isManaging = false; },
+			"Exit player management");
 	}
 	~Player() {}
 
 	static Player *instance;
-	bool isEditing = false;
+	bool isManaging = false;
+
+	void changeWeapon()
+	{
+		Weapon *curWep = weapon;
+		weapon = inventory.getItem<Weapon>();
+		inventory.add(curWep);
+		system("clear");
+	}
+
+	void changeShield() {}
 
 public:
 	static Player &getInstance()
@@ -43,9 +57,13 @@ public:
 		return *instance;
 	}
 
-	void editPlayer()
+	void manage()
 	{
-		isEditing = true;
+		isManaging = true;
+		while (isManaging)
+		{
+			autoTrigger("Player");
+		}
 	}
 
 	void resetPlayer()
